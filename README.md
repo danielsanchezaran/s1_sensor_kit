@@ -1,1 +1,1 @@
-# sample_sensor_kit_launch
+# logiee_sensor_kit_launch
