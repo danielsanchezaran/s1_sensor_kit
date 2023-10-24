@@ -2,18 +2,27 @@
   <arg name="launch_driver" default="true"/>
 
   <group>
+  <include file="$(find-pkg-share microstrain_inertial_driver)/launch/microstrain_launch.py">
+    <arg name="namespace" value=""/>
+    </include>
+
+  </group>
+
+  <group>
     <push-ros-namespace namespace="imu"/>
 
-    <group>
-      <arg name="params_file" default="$(find microstrain_inertial_driver)/config/empty.yml" />
-      <push-ros-namespace namespace="microstrain"/>
-      <node pkg="microstrain_inertial_driver" name="microstrain_inertial_driver_node" exec="microstrain_inertial_driver_node" if="$(var launch_driver)">
-        <rosparam command="load" file="$(find microstrain_inertial_driver)/microstrain_inertial_driver_common/config/params.yml" />
+    <!-- <group> -->
+      <!-- <push-ros-namespace namespace="microstrain"/> -->
+      <!-- <node pkg="microstrain_inertial_driver" name="microstrain_inertial_driver_node" exec="microstrain_inertial_driver_node" if="$(var launch_driver)">
+        <rosparam command="load" file="$(find-pkg-share microstrain_inertial_driver)/microstrain_inertial_driver_common/config/params.yml" />
         <remap from="imu/data" to="imu_raw"/>
-      </node>
-    </group>
+      </node> -->
 
-    <arg name="imu_raw_name" default="microstrain/imu_raw"/>
+    <!-- </group> -->
+    <!-- <arg name="imu_raw_name" default="data"/> -->
+
+
+    <arg name="imu_raw_name" default="data"/>
     <arg name="imu_corrector_param_file" default="$(find-pkg-share individual_params)/config/$(var vehicle_id)/logiee_sensor_kit/imu_corrector.param.yaml"/>
     <include file="$(find-pkg-share imu_corrector)/launch/imu_corrector.launch.xml">
       <arg name="input_topic" value="$(var imu_raw_name)"/>
