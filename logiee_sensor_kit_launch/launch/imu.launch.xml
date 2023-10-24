@@ -5,11 +5,11 @@
     <push-ros-namespace namespace="imu"/>
 
     <group>
+      <arg name="params_file" default="$(find microstrain_inertial_driver)/config/empty.yml" />
       <push-ros-namespace namespace="microstrain"/>
-      <node pkg="microstrain_inertial_driver" name="tag_serial_driver" exec="tag_serial_driver" if="$(var launch_driver)">
-        <remap from="imu/data_raw" to="imu_raw"/>
-        <param name="port" value="/dev/imu"/>
-        <param name="imu_frame_id" value="microstrain/imu_link"/>
+      <node pkg="microstrain_inertial_driver" name="microstrain_inertial_driver_node" exec="microstrain_inertial_driver_node" if="$(var launch_driver)">
+        <rosparam command="load" file="$(find microstrain_inertial_driver)/microstrain_inertial_driver_common/config/params.yml" />
+        <remap from="imu/data" to="imu_raw"/>
       </node>
     </group>
 
