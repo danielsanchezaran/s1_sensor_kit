@@ -4,6 +4,8 @@
   <group>
   <include file="$(find-pkg-share microstrain_inertial_driver)/launch/microstrain_launch.py">
     <arg name="namespace" value=""/>
+    <arg name="configure" value="true"/>
+    <arg name="activate" value="true"/>
     </include>
 
   </group>
